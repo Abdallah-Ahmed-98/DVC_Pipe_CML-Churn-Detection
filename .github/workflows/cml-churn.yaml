@@ -27,7 +27,7 @@ jobs:
         
           # Post reports as comments in GitHub PRs
           dvc repro
-          #git fetch --prune
+          git fetch --prune
 
           echo "## Metrics" >> report.md
           dvc metrics diff --md main >> report.md
