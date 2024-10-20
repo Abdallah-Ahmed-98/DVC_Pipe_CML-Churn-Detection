@@ -1,0 +1,78 @@
+schema: '2.0'
+stages:
+  prepare:
+    cmd: python data_prep.py
+    deps:
+    - path: data/dataset.csv
+      hash: md5
+      md5: 7321aa9a1e24a9e139f42124f736b415
+      size: 674857
+    - path: data_prep.py
+      hash: md5
+      md5: f53a0185a9f686dbabbc103d456b2920
+      size: 620
+    outs:
+    - path: outs/prepared_df.csv
+      hash: md5
+      md5: 883886ae55d2deb5b1128a5bc40eea4d
+      size: 478635
+  process:
+    cmd: python data_process.py
+    deps:
+    - path: data_process.py
+      hash: md5
+      md5: 9437c0c55ddb408614410589de2548d6
+      size: 2849
+    - path: outs/prepared_df.csv
+      hash: md5
+      md5: 883886ae55d2deb5b1128a5bc40eea4d
+      size: 478635
+    outs:
+    - path: outs/processed_test_X.csv
+      hash: md5
+      md5: 75707f7b4eab75dbdcf29d7418a72bc9
+      size: 230737
+    - path: outs/processed_test_y.csv
+      hash: md5
+      md5: 4973c310e51383dd6a3f2026894cfc7b
+      size: 6002
+    - path: outs/processed_train_X.csv
+      hash: md5
+      md5: f7cd1693204038dbc4e6c654e5f4531a
+      size: 922607
+    - path: outs/processed_train_y.csv
+      hash: md5
+      md5: 0abd5b4de1e848f1c2eaf6e9fd53eced
+      size: 23978
+  train:
+    cmd: python data_train.py
+    deps:
+    - path: data_train.py
+      hash: md5
+      md5: ede45bad63fcdf484bbff5310f0365c9
+      size: 4534
+    - path: outs/processed_test_X.csv
+      hash: md5
+      md5: 75707f7b4eab75dbdcf29d7418a72bc9
+      size: 230737
+    - path: outs/processed_test_y.csv
+      hash: md5
+      md5: 4973c310e51383dd6a3f2026894cfc7b
+      size: 6002
+    - path: outs/processed_train_X.csv
+      hash: md5
+      md5: f7cd1693204038dbc4e6c654e5f4531a
+      size: 922607
+    - path: outs/processed_train_y.csv
+      hash: md5
+      md5: 0abd5b4de1e848f1c2eaf6e9fd53eced
+      size: 23978
+    outs:
+    - path: conf_matrix.png
+      hash: md5
+      md5: 673c49852796968ad52f5f0cc7121381
+      size: 131895
+    - path: metrics.json
+      hash: md5
+      md5: 67def4b2555ba347c69cafc99efffe2f
+      size: 287
